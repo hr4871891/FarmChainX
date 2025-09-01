@@ -1,0 +1,108 @@
+.login-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #4caf50;
+  font-family: Arial, sans-serif;
+}
+
+.login-page-container .login-box {
+  background-color:#fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  max-width: 90%;
+  text-align: left;   /* ✅ Keep form fields left-aligned */
+}
+
+/* ✅ Center the logo at top */
+.login-page-container .logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.login-page-container .logo {
+  max-width: 120px;
+  height: auto;
+  display: block;
+}
+
+/* Form group styles */
+.login-page-container .form-group {
+  margin-bottom: 15px;
+}
+
+.login-page-container .form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Input fields */
+.login-page-container .form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+/* Password input container */
+.login-page-container .password-input-container {
+  position: relative;
+  width: 100%;
+}
+
+.login-page-container .password-input-container input {
+  padding-right: 40px;
+}
+
+.login-page-container .password-toggle-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #555;
+}
+
+/* Login button */
+.login-page-container .login-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-page-container .login-button:hover {
+  background-color: #218838;
+}
+
+/* Register link */
+.login-page-container .register-link {
+  margin-top: 15px;
+  font-size: 14px;
+  text-align: center; /* ✅ Keeps the link nicely centered */
+}
+
+.login-page-container .register-link a {
+  color: #28a745;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-page-container .register-link a:hover {
+  text-decoration: underline;
+}

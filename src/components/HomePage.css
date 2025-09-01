@@ -1,0 +1,264 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.homepage {
+  font-family: Arial, sans-serif;
+  color: #000;
+  background-color: #F1F8E9;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+/* Navbar */
+.navbar {
+  width: 100%;
+  padding: 0.6rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  background-color: #2E7D32;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.logo-img {
+  height: 100px;
+  width: auto;
+  margin-right: 1px;
+}
+
+.logo-text {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Nav links */
+.nav-links a {
+  text-decoration: none;
+  font-size: 1rem;
+  color: #000;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.nav-links a:hover {
+  background-color: black;
+  color: white;
+}
+
+.lang-btn {
+  border: none;
+  background: none;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 4rem 2rem;
+}
+
+.hero-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transform: translateY(-60px);
+  text-align: left;
+}
+
+.hero-text h1 {
+  font-size: 2.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.hero-text p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+  max-width: 500px;
+}
+
+.hero-illustration {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 40px;
+}
+
+/* Farmer Image Animation */
+.farmer-img {
+  width: 800px;
+  height: auto;
+  object-fit: contain;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1.2s ease-out forwards;
+}
+
+.get-started-btn {
+  background-color: #42ad46;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  align-self: flex-start;
+}
+
+.get-started-btn:hover {
+  background-color: #1b5e20;
+  transform: scale(1.05);
+}
+
+/* Keyframes */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------------------- */
+/* Features Section       */
+/* ---------------------- */
+.features {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 4rem 2rem;
+  gap: 3rem;
+  background-color: #F1F8E9;
+  margin-top: -40px;
+}
+
+/* Left card with image + text */
+.features-card {
+  flex: 1;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-width: 450px;
+  text-align: left;
+  min-height: 500px;
+}
+
+
+.features-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.features-info {
+  padding: 1.5rem;
+}
+
+.features-info h2 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.features-info p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Right features list */
+.features-list {
+  flex: 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.feature-box {
+  background:  #F1F8E9; 
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+   text-align: left; 
+}
+
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: white; /* circle background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.feature-icon img {
+  width: 28px;  /* control icon size */
+  height: 28px;
+  object-fit: contain;
+}
+
+
+.feature-box h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.feature-box p {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .features {
+    flex-direction: column;
+  }
+
+  .features-card {
+    max-width: 100%;
+  }
+
+  .features-list {
+    grid-template-columns: 1fr;
+  }
+}

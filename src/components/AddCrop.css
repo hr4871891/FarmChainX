@@ -1,0 +1,78 @@
+.add-crop-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+  font-family: Arial, sans-serif;
+}
+
+.add-crop-page-container .add-crop-box {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  max-width: 90%;
+  text-align: center;
+}
+
+.add-crop-page-container .logo-container {
+  margin-bottom: 20px;
+}
+
+.add-crop-page-container .logo {
+  max-width: 150px;
+  height: auto;
+}
+
+.add-crop-page-container .add-crop-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-crop-page-container .form-group {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.add-crop-page-container .form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+}
+
+.add-crop-page-container .form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+/* Specific styling for file input to match other inputs */
+.add-crop-page-container .form-group input[type="file"] {
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.add-crop-page-container .add-crop-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #28a745;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.add-crop-page-container .add-crop-button:hover {
+  background-color: #218838;
+}

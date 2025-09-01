@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "imageKey": "Broccoli",
+    "name": "Broccoli",
+    "type": "Vegetables",
+    "soilType": "Loam",
+    "status": "Growing",
+    "pesticides": "Pesticide A",
+    "plantedDate": "1/8/2025",
+    "harvestDate": "21/8/2025",
+    "location": "37.7749,122.4194"
+  },
+  {
+    "id": 2,
+    "imageKey": "Kiwi",
+    "name": "Kiwi",
+    "type": "Fruits",
+    "soilType": "Sandy",
+    "status": "Planted",
+    "pesticides": "Insecticide B",
+    "plantedDate": "14/8/2025",
+    "harvestDate": "30/8/2025",
+    "location": "37.7749,122.4194"
+  },
+  {
+    "id": 3,
+    "imageKey": "Cabbage",
+    "name": "Cabbage",
+    "type": "Vegetables",
+    "soilType": "Silt",
+    "status": "Planned",
+    "pesticides": "Organic",
+    "plantedDate": "15/8/2025",
+    "harvestDate": "27/8/2025",
+    "location": "37.7749,122.4194"
+  }
+]

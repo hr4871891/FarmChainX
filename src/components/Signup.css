@@ -1,0 +1,143 @@
+.signup-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color:  #4caf50;
+  font-family: Arial, sans-serif;
+}
+
+.signup-page-container .signup-box {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 450px;
+  max-width: 90%;
+  text-align: left;   /* ✅ Make form left-aligned */
+}
+
+/* ✅ Force logo centered */
+.signup-page-container .logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.signup-page-container .logo {
+  max-width: 100px;
+  height: auto;
+  display: block;
+}
+
+.signup-page-container .signup-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-page-container .form-group {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.signup-page-container .form-group label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: bold;
+  color: #555;
+}
+
+.signup-page-container .form-group input[type="text"],
+.signup-page-container .form-group input[type="email"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.signup-page-container .password-input-container {
+  position: relative;
+  width: 100%;
+}
+
+.signup-page-container .password-input-container input[type="password"],
+.signup-page-container .password-input-container input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  padding-right: 35px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.signup-page-container .password-toggle-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #555;
+  font-size: 14px;
+}
+
+.signup-page-container .role-group {
+  margin-bottom: 15px;
+}
+
+.signup-page-container .role-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 3px;
+}
+
+.signup-page-container .role-options label {
+  font-weight: normal;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.signup-page-container .role-options input[type="radio"] {
+  accent-color: #28a745;
+  margin: 0;
+}
+
+.signup-page-container .signup-button {
+  width: 100%;
+  padding: 8px;
+  background-color: #28a745;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.signup-page-container .signup-button:hover {
+  background-color: #218838;
+}
+
+.signup-page-container .login-link {
+  font-size: 12px;
+  text-align: center;  /* ✅ Keep login link centered */
+}
+
+.signup-page-container .login-link a {
+  color: #28a745;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.signup-page-container .login-link a:hover {
+  text-decoration: underline;
+}

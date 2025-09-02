@@ -12,6 +12,7 @@ import DashboardContainer from "./components/DashboardContainer";
 import Checkout from "./components/Checkout";
 import HomePage from "./components/HomePage";
 import ProtectedRoute from "./components/ProtectedRoute"; // Your protected route component
+import AddCrop from './components/AddCrop';
 
 import "./App.css";
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/add-crop" element={<AddCrop />} /> 
 
           {/* --- PROTECTED DASHBOARD ROUTE --- */}
           {/* The "*" allows for nested routes like /dashboard/add-crop */}

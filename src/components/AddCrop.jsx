@@ -83,7 +83,6 @@ const AddCrop = ({ onAddCrop }) => {
         <div className="logo-container">
           <img src={logo} alt="FarmChainX Logo" className="logo" />
         </div>
-        <h2 className="form-title">Add New Crop</h2>
         <form className="add-crop-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="name">Crop Name</label>

@@ -1,14 +1,17 @@
-.add-crop-page-container {
+ .add-crop-page-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* Changed from 'center' to 'flex-start' */
   min-height: 100vh;
-  background-color: #f0f2f5;
+  background-color: #4caf50;
   font-family: Arial, sans-serif;
+  padding-top: 10vh; /* Added padding to create space from the top */
+  padding-bottom: 10vh;
+  box-sizing: border-box; /* Ensures padding is included in the element's total height */
 }
 
 .add-crop-page-container .add-crop-box {
-  background-color: #fff;
+  background-color: #F1F8E9;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -18,7 +21,10 @@
 }
 
 .add-crop-page-container .logo-container {
-  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .add-crop-page-container .logo {

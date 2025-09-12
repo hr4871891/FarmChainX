@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import "./Signup.css";
 import logo from "../assets/logo.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useNavigate } from "react-router-dom"; // MODIFICATION 1: Import useNavigate
+import { useNavigate } from "react-router-dom";
+import axios from "axios"; // ✅ Add axios
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +16,7 @@ const Signup = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const navigate = useNavigate(); // MODIFICATION 2: Initialize navigate
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,29 +34,31 @@ const Signup = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  // MODIFICATION 3: Update the signup handler function
-  const handleSignup = (e) => {
+  // ✅ Updated signup handler (connects to backend)
+  const handleSignup = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
 
-    // A. Create a user object without the 'confirmPassword' field
-    const newUser = {
-      name: formData.name,
-      email: formData.email,
-      password: formData.password,
-      role: formData.role,
-    };
+    try {
+      const newUser = {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        role: formData.role.toLowerCase(),
+      };
 
-    // B. Save the new user to localStorage
-    // We use JSON.stringify to convert the object into a string for storage.
-    localStorage.setItem('registeredUser', JSON.stringify(newUser));
+      // POST request to backend
+      await axios.post("http://localhost:5000/signup", newUser);
 
-    // C. Alert the user and redirect to the login page
-    alert("Registration successful! Please log in.");
-    navigate("/login");
+      alert("Registration successful! Please log in.");
+      navigate("/login");
+    } catch (err) {
+      console.error(err);
+      alert("Signup failed: " + (err.response?.data?.error || "Server error"));
+    }
   };
 
   return (
@@ -137,56 +140,20 @@ const Signup = () => {
           <div className="form-group role-group">
             <label>Role</label>
             <div className="role-options">
-              <label>
-                <input
-                  type="radio"
-                  name="role"
-                  value="Farmer"
-                  checked={formData.role === "Farmer"}
-                  onChange={handleChange}
-                />{" "}
-                Farmer
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="role"
-                  value="Distributor"
-                  checked={formData.role === "Distributor"}
-                  onChange={handleChange}
-                />{" "}
-                Distributor
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="role"
-                  value="Retailer"
-                  checked={formData.role === "Retailer"}
-                  onChange={handleChange}
-                />{" "}
-                Retailer
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="role"
-                  value="Customer"
-                  checked={formData.role === "Customer"}
-                  onChange={handleChange}
-                />{" "}
-                Customer
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="role"
-                  value="Admin"
-                  checked={formData.role === "Admin"}
-                  onChange={handleChange}
-                />{" "}
-                Admin
-              </label>
+              {["Farmer", "Distributor", "Retailer", "Customer", "Admin"].map(
+                (role) => (
+                  <label key={role}>
+                    <input
+                      type="radio"
+                      name="role"
+                      value={role}
+                      checked={formData.role === role}
+                      onChange={handleChange}
+                    />{" "}
+                    {role}
+                  </label>
+                )
+              )}
             </div>
           </div>
 

@@ -1,10 +1,11 @@
 // src/components/Login.jsx
 import React, { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "./Login.css";
 import logo from "../assets/logo.png";
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import axios from "axios"; // ✅ import axios
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,37 +14,38 @@ const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  // Your original login handler
-  const handleLogin = (e) => {
+  // ✅ Updated login handler (checks DB via backend)
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const storedUser = localStorage.getItem('registeredUser');
-    if (!storedUser) {
-      alert("No user found with this email. Please sign up first.");
-      return;
-    }
-    const registeredUser = JSON.parse(storedUser);
-    if (email === registeredUser.email && password === registeredUser.password) {
-      login(registeredUser);
-      navigate('/dashboard'); // --- MODIFIED: Redirect to /dashboard
-    } else {
-      alert("Invalid email or password.");
+
+    try {
+      const res = await axios.post("http://localhost:5000/login", {
+        email,
+        password,
+      });
+
+      if (res.data && res.data.user) {
+        login(res.data.user); // save to context
+        navigate("/dashboard"); // redirect after login
+      } else {
+        alert("Invalid email or password.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Login failed: " + (err.response?.data?.error || "Server error"));
     }
   };
 
-  // --- NEW: A handler for the test login buttons ---
+  // ✅ Fixed test login (no `formData` reference now)
   const handleTestLogin = (role) => {
-    // Create a mock user object with the specified role
     const testUser = {
       name: `${role.charAt(0).toUpperCase() + role.slice(1)} User`,
       email: `${role}@farmchainx.com`,
-      role: role,
+      role: role.toLowerCase(),
     };
-    
-    // Log in with the mock user
+
     login(testUser);
-    
-    // Redirect to the dashboard
-    navigate('/dashboard');
+    navigate("/dashboard");
   };
 
   const togglePasswordVisibility = () => {
@@ -58,7 +60,6 @@ const Login = () => {
         </div>
 
         <form className="login-form" onSubmit={handleLogin}>
-          {/* Your email and password inputs remain unchanged */}
           <div className="form-group">
             <label htmlFor="email">Email Address</label>
             <input
@@ -98,17 +99,28 @@ const Login = () => {
           Don’t have an account? <Link to="/signup">Register</Link>
         </div>
 
-        {/* --- NEW: Test Login Section --- */}
-        <div className="test-login-section" style={{textAlign: 'center', marginTop: '20px'}}>
-            <hr/>
-            <h4 style={{color: '#555'}}>For Testing Only</h4>
-            <button onClick={() => handleTestLogin('farmer')}>Login as Farmer</button>
-            <button onClick={() => handleTestLogin('distributor')}>Login as Distributor</button>
-            <button onClick={() => handleTestLogin('retailer')}>Login as Retailer</button>
-            <button onClick={() => handleTestLogin('customer')}>Login as Customer</button>
-            <button onClick={() => handleTestLogin('admin')}>Login as Admin</button>
+        <div
+          className="test-login-section"
+          style={{ textAlign: "center", marginTop: "20px" }}
+        >
+          <hr />
+          <h4 style={{ color: "#555" }}>For Testing Only</h4>
+          <button onClick={() => handleTestLogin("farmer")}>
+            Login as Farmer
+          </button>
+          <button onClick={() => handleTestLogin("distributor")}>
+            Login as Distributor
+          </button>
+          <button onClick={() => handleTestLogin("retailer")}>
+            Login as Retailer
+          </button>
+          <button onClick={() => handleTestLogin("customer")}>
+            Login as Customer
+          </button>
+          <button onClick={() => handleTestLogin("admin")}>
+            Login as Admin
+          </button>
         </div>
-
       </div>
     </div>
   );

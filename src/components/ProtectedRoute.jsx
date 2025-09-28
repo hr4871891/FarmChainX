@@ -1,21 +1,22 @@
 // src/components/ProtectedRoute.jsx
+import React from "react";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
-import React from 'react';
-import { Navigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+const ProtectedRoute = ({ children, role }) => {
+  const { user } = useAuth(); // assuming AuthContext stores { username, role }
 
-const ProtectedRoute = ({ children }) => {
-  // Get the user from our AuthContext
-  const { user } = useAuth();
-
-  // If there is no user, it means they are not logged in.
-  // We use the <Navigate> component to redirect them to the login page.
+  // If no user → redirect to login
   if (!user) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" replace />;
   }
 
-  // If there IS a user, we allow the component's children to be rendered.
-  // 'children' will be whatever page we are trying to protect (e.g., the Products page).
+  // If route requires a specific role → check it
+  if (role && user.role !== role) {
+    return <Navigate to="/" replace />; // redirect or show "Unauthorized"
+  }
+
+  // Otherwise → allow access
   return children;
 };
 

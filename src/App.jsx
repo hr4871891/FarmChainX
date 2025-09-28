@@ -8,42 +8,88 @@ import { CropProvider } from "./context/CropContext";
 // Import Components
 import Signup from "./components/Signup";
 import Login from "./components/Login";
-import DashboardContainer from "./components/DashboardContainer";
-import Checkout from "./components/Checkout";
 import HomePage from "./components/HomePage";
-import ProtectedRoute from "./components/ProtectedRoute"; // Your protected route component
+import ProtectedRoute from "./components/ProtectedRoute";
+
+// Import Other Dashboards
+import DistributorDashboard from './components/DistributorDashboard';
+import RetailerDashboard from './components/RetailerDashboard';
+import CustomerDashboard from './components/CustomerDashboard';
+import AdminDashboard from './components/AdminDashboard';
+
+import Checkout from "./components/Checkout";
 import AddCrop from './components/AddCrop';
 
 import "./App.css";
 
 function App() {
-  // All crop state and handler functions have been removed from here.
-  // They now live in CropContext.jsx!
-
   return (
-    // The CropProvider makes the crop data available to any component that needs it.
     <CropProvider>
       <div className="full-width-container">
         <Routes>
           {/* --- PUBLIC ROUTES --- */}
-          {/* These routes are accessible to anyone, logged in or not. */}
           <Route path="/" element={<HomePage />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/add-crop" element={<AddCrop />} /> 
 
-          {/* --- PROTECTED DASHBOARD ROUTE --- */}
-          {/* The "*" allows for nested routes like /dashboard/add-crop */}
-          {/* This route is wrapped by ProtectedRoute. If a user is not logged in, */}
-          {/* they will be redirected to the /login page. */}
-          <Route
-            path="/dashboard/*"
+          {/* --- PROTECTED DASHBOARD ROUTES --- */}
+          <Route 
+            path="/farmer-dashboard" 
+            element={
+              <ProtectedRoute role="FARMER">
+                <HomePage />  {/* HomePage is farmer's dashboard */}
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/distributor-dashboard" 
+            element={
+              <ProtectedRoute role="DISTRIBUTOR">
+                <DistributorDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/retailer-dashboard" 
+            element={
+              <ProtectedRoute role="RETAILER">
+                <RetailerDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/customer-dashboard" 
+            element={
+              <ProtectedRoute role="CUSTOMER">
+                <CustomerDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/admin-dashboard" 
+            element={
+              <ProtectedRoute role="ADMIN">
+                <AdminDashboard />
+              </ProtectedRoute>
+            } 
+          />
+
+          {/* --- OTHER PROTECTED ROUTES --- */}
+          <Route 
+            path="/checkout" 
             element={
               <ProtectedRoute>
-                <DashboardContainer />
+                <Checkout />
               </ProtectedRoute>
-            }
+            } 
+          />
+          <Route 
+            path="/add-crop" 
+            element={
+              <ProtectedRoute>
+                <AddCrop />
+              </ProtectedRoute>
+            } 
           />
         </Routes>
       </div>

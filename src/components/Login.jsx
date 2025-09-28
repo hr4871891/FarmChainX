@@ -1,53 +1,55 @@
 // src/components/Login.jsx
 import React, { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from "../context/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../apiService"; 
+import { useAuth } from "../context/AuthContext"; 
 import "./Login.css";
 import logo from "../assets/logo.png";
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login } = useAuth(); // 👈 from AuthContext
 
-  // Your original login handler
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const storedUser = localStorage.getItem('registeredUser');
-    if (!storedUser) {
-      alert("No user found with this email. Please sign up first.");
-      return;
-    }
-    const registeredUser = JSON.parse(storedUser);
-    if (email === registeredUser.email && password === registeredUser.password) {
-      login(registeredUser);
-      navigate('/dashboard'); // --- MODIFIED: Redirect to /dashboard
-    } else {
-      alert("Invalid email or password.");
-    }
-  };
+    setMessage("");
 
-  // --- NEW: A handler for the test login buttons ---
-  const handleTestLogin = (role) => {
-    // Create a mock user object with the specified role
-    const testUser = {
-      name: `${role.charAt(0).toUpperCase() + role.slice(1)} User`,
-      email: `${role}@farmchainx.com`,
-      role: role,
-    };
-    
-    // Log in with the mock user
-    login(testUser);
-    
-    // Redirect to the dashboard
-    navigate('/dashboard');
-  };
+    try {
+      const response = await loginUser({ email, password }); 
+      const { role, username } = response.data;
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+      // ✅ Use AuthContext to store user (it saves to localStorage too)
+      login({ username, role });
+
+      // Redirect based on role
+      switch (role) {
+        case "FARMER":
+          navigate("/farmer-dashboard");
+          break;
+        case "DISTRIBUTOR":
+          navigate("/distributor-dashboard");
+          break;
+        case "RETAILER":
+          navigate("/retailer-dashboard");
+          break;
+        case "CUSTOMER":
+          navigate("/customer-dashboard");
+          break;
+        case "ADMIN":
+          navigate("/admin-dashboard");
+          break;
+        default:
+          navigate("/");
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+      setMessage("Invalid email or password. Please try again.");
+    }
   };
 
   return (
@@ -58,7 +60,6 @@ const Login = () => {
         </div>
 
         <form className="login-form" onSubmit={handleLogin}>
-          {/* Your email and password inputs remain unchanged */}
           <div className="form-group">
             <label htmlFor="email">Email Address</label>
             <input
@@ -83,12 +84,15 @@ const Login = () => {
               />
               <span
                 className="password-toggle-icon"
-                onClick={togglePasswordVisibility}
+                onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </span>
             </div>
           </div>
+
+          {message && <p className="error-message">{message}</p>}
+
           <button type="submit" className="login-button">
             Login
           </button>
@@ -97,18 +101,6 @@ const Login = () => {
         <div className="register-link">
           Don’t have an account? <Link to="/signup">Register</Link>
         </div>
-
-        {/* --- NEW: Test Login Section --- */}
-        <div className="test-login-section" style={{textAlign: 'center', marginTop: '20px'}}>
-            <hr/>
-            <h4 style={{color: '#555'}}>For Testing Only</h4>
-            <button onClick={() => handleTestLogin('farmer')}>Login as Farmer</button>
-            <button onClick={() => handleTestLogin('distributor')}>Login as Distributor</button>
-            <button onClick={() => handleTestLogin('retailer')}>Login as Retailer</button>
-            <button onClick={() => handleTestLogin('customer')}>Login as Customer</button>
-            <button onClick={() => handleTestLogin('admin')}>Login as Admin</button>
-        </div>
-
       </div>
     </div>
   );

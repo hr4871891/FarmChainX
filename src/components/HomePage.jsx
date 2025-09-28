@@ -36,7 +36,7 @@ const HomePage = () => {
         </div>
         <nav className="nav-links">
           <a href="/">HOME</a>
-          <a href="/products">PRODUCTS</a>
+          <a href="/login">PRODUCTS</a>
           <a href="/dashboard">SUPPORT</a>
           <a href="/signup">START N</a>
           <button className="lang-btn" onClick={handleLanguageToggle}>
@@ -88,7 +88,7 @@ const HomePage = () => {
 
         <div className="features-list">
           <div className="feature-box">
-            <span className="feature-icon">🔍</span>
+            <span className="feature-icon">🔍︎</span>
             <h3>Traceability</h3>
             <p>
               FarmChainX ensures full traceability of agricultural products 
@@ -99,7 +99,7 @@ const HomePage = () => {
           </div>
 
           <div className="feature-box">
-            <span className="feature-icon">🌱</span>
+            <span className="feature-icon">🌿</span>
             <h3>Crop Recommendation</h3>
             <p>
               Various factors like minerals present in the soil, temperature, 
@@ -109,7 +109,7 @@ const HomePage = () => {
           </div>
 
           <div className="feature-box">
-            <span className="feature-icon">🗂</span>
+            <span className="feature-icon">📝</span>
             <h3>Recordkeeping</h3>
             <p>
               FarmChainX helps farmers maintain accurate records of cultivation, 
